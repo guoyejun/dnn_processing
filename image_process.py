@@ -7,8 +7,8 @@ in_img = in_img.astype(np.float32)/255.0
 in_data = in_img[np.newaxis, :]
 
 x = tf.placeholder(tf.float32, shape=[1, None, None, 3], name='dnn_in')
-x1 = tf.minimum(0.7, x)
-x2 = tf.maximum(x1, 0.4)
+x1 = tf.subtract(x, 0.5)
+x2 = tf.abs(x1)
 y = tf.identity(x2, name='dnn_out')
 
 sess=tf.Session()
