@@ -1,0 +1,811 @@
+<?xml version="1.0" ?>
+<net name="can" version="10">
+	<layers>
+		<layer id="0" name="x" type="Parameter" version="opset1">
+			<data element_type="f32" shape="1,3,321,481"/>
+			<output>
+				<port id="0" precision="FP32">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="1" name="can/enc/kernel/read/Output_0/Data__const" type="Const" version="opset1">
+			<data element_type="f32" offset="0" shape="24,3,3,3" size="2592"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="2" name="can/enc/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="same_upper" dilations="1,1" output_padding="0,0" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="3" name="can/enc/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data element_type="f32" offset="2592" shape="1,24,1,1" size="96"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="4" name="can/enc/BiasAdd/Add" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="5" name="can/enc/LeakyRelu1959/Cast_12320_const" type="Const" version="opset1">
+			<data element_type="f32" offset="2688" shape="1" size="4"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="6" name="can/enc/LeakyRelu1959" type="PReLU" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="7" name="can/conv0/kernel/read/Output_0/Data__const" type="Const" version="opset1">
+			<data element_type="f32" offset="2692" shape="24,24,3,3" size="20736"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>24</dim>
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="8" name="can/conv0/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="same_upper" dilations="1,1" output_padding="0,0" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>24</dim>
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="9" name="can/conv0/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data element_type="f32" offset="23428" shape="1,24,1,1" size="96"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="10" name="can/conv0/BiasAdd/Add" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="11" name="can/conv0/LeakyRelu1947/Cast_12316_const" type="Const" version="opset1">
+			<data element_type="f32" offset="2688" shape="1" size="4"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="12" name="can/conv0/LeakyRelu1947" type="PReLU" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="13" name="can/conv1/kernel/read/Output_0/Data__const" type="Const" version="opset1">
+			<data element_type="f32" offset="23524" shape="24,24,3,3" size="20736"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>24</dim>
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="14" name="can/conv1/Conv2D" type="Convolution" version="opset1">
+			<data dilations="2,2" output_padding="0,0" pads_begin="2,2" pads_end="2,2" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>24</dim>
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="15" name="can/conv1/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data element_type="f32" offset="44260" shape="1,24,1,1" size="96"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="16" name="can/conv1/BiasAdd/Add" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="17" name="can/conv1/LeakyRelu1955/Cast_12322_const" type="Const" version="opset1">
+			<data element_type="f32" offset="2688" shape="1" size="4"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="18" name="can/conv1/LeakyRelu1955" type="PReLU" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="19" name="can/conv2/kernel/read/Output_0/Data__const" type="Const" version="opset1">
+			<data element_type="f32" offset="44356" shape="24,24,3,3" size="20736"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>24</dim>
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="20" name="can/conv2/Conv2D" type="Convolution" version="opset1">
+			<data dilations="4,4" output_padding="0,0" pads_begin="4,4" pads_end="4,4" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>24</dim>
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="21" name="can/conv2/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data element_type="f32" offset="65092" shape="1,24,1,1" size="96"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="22" name="can/conv2/BiasAdd/Add" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="23" name="can/conv2/LeakyRelu1951/Cast_12314_const" type="Const" version="opset1">
+			<data element_type="f32" offset="2688" shape="1" size="4"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="24" name="can/conv2/LeakyRelu1951" type="PReLU" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="25" name="can/conv3/kernel/read/Output_0/Data__const" type="Const" version="opset1">
+			<data element_type="f32" offset="65188" shape="24,24,3,3" size="20736"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>24</dim>
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="26" name="can/conv3/Conv2D" type="Convolution" version="opset1">
+			<data dilations="8,8" output_padding="0,0" pads_begin="8,8" pads_end="8,8" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>24</dim>
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="27" name="can/conv3/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data element_type="f32" offset="85924" shape="1,24,1,1" size="96"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="28" name="can/conv3/BiasAdd/Add" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="29" name="can/conv3/LeakyRelu1963/Cast_12312_const" type="Const" version="opset1">
+			<data element_type="f32" offset="2688" shape="1" size="4"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="30" name="can/conv3/LeakyRelu1963" type="PReLU" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="31" name="can/dec1/kernel/read/Output_0/Data__const" type="Const" version="opset1">
+			<data element_type="f32" offset="86020" shape="24,24,3,3" size="20736"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>24</dim>
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="32" name="can/dec1/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="same_upper" dilations="1,1" output_padding="0,0" pads_begin="1,1" pads_end="1,1" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>24</dim>
+					<dim>24</dim>
+					<dim>3</dim>
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="33" name="can/dec1/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data element_type="f32" offset="106756" shape="1,24,1,1" size="96"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="34" name="can/dec1/BiasAdd/Add" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="35" name="can/dec1/LeakyRelu1967/Cast_12318_const" type="Const" version="opset1">
+			<data element_type="f32" offset="2688" shape="1" size="4"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="36" name="can/dec1/LeakyRelu1967" type="PReLU" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="37" name="can/sub/neg_/Fused_Mul_16501652_const" type="Const" version="opset1">
+			<data element_type="f32" offset="106852" shape="3,24,1,1" size="288"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>3</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="38" name="can/dec2/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="same_upper" dilations="1,1" output_padding="0,0" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>24</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>3</dim>
+					<dim>24</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="39" name="data_add_1609/copy_const" type="Const" version="opset1">
+			<data element_type="f32" offset="107140" shape="1,3,1,1" size="12"/>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="40" name="can/dec2/BiasAdd/Add/Fused_Add_" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="41" name="can/sub" type="Add" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+				<port id="1">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="42" name="y/sink_port_0" type="Result" version="opset1">
+			<input>
+				<port id="0">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>321</dim>
+					<dim>481</dim>
+				</port>
+			</input>
+		</layer>
+	</layers>
+	<edges>
+		<edge from-layer="0" from-port="0" to-layer="2" to-port="0"/>
+		<edge from-layer="1" from-port="1" to-layer="2" to-port="1"/>
+		<edge from-layer="2" from-port="2" to-layer="4" to-port="0"/>
+		<edge from-layer="3" from-port="1" to-layer="4" to-port="1"/>
+		<edge from-layer="4" from-port="2" to-layer="6" to-port="0"/>
+		<edge from-layer="5" from-port="1" to-layer="6" to-port="1"/>
+		<edge from-layer="6" from-port="2" to-layer="8" to-port="0"/>
+		<edge from-layer="7" from-port="1" to-layer="8" to-port="1"/>
+		<edge from-layer="8" from-port="2" to-layer="10" to-port="0"/>
+		<edge from-layer="9" from-port="1" to-layer="10" to-port="1"/>
+		<edge from-layer="10" from-port="2" to-layer="12" to-port="0"/>
+		<edge from-layer="11" from-port="1" to-layer="12" to-port="1"/>
+		<edge from-layer="12" from-port="2" to-layer="14" to-port="0"/>
+		<edge from-layer="13" from-port="1" to-layer="14" to-port="1"/>
+		<edge from-layer="14" from-port="2" to-layer="16" to-port="0"/>
+		<edge from-layer="15" from-port="1" to-layer="16" to-port="1"/>
+		<edge from-layer="16" from-port="2" to-layer="18" to-port="0"/>
+		<edge from-layer="17" from-port="1" to-layer="18" to-port="1"/>
+		<edge from-layer="18" from-port="2" to-layer="20" to-port="0"/>
+		<edge from-layer="19" from-port="1" to-layer="20" to-port="1"/>
+		<edge from-layer="20" from-port="2" to-layer="22" to-port="0"/>
+		<edge from-layer="21" from-port="1" to-layer="22" to-port="1"/>
+		<edge from-layer="22" from-port="2" to-layer="24" to-port="0"/>
+		<edge from-layer="23" from-port="1" to-layer="24" to-port="1"/>
+		<edge from-layer="24" from-port="2" to-layer="26" to-port="0"/>
+		<edge from-layer="25" from-port="1" to-layer="26" to-port="1"/>
+		<edge from-layer="26" from-port="2" to-layer="28" to-port="0"/>
+		<edge from-layer="27" from-port="1" to-layer="28" to-port="1"/>
+		<edge from-layer="28" from-port="2" to-layer="30" to-port="0"/>
+		<edge from-layer="29" from-port="1" to-layer="30" to-port="1"/>
+		<edge from-layer="30" from-port="2" to-layer="32" to-port="0"/>
+		<edge from-layer="31" from-port="1" to-layer="32" to-port="1"/>
+		<edge from-layer="32" from-port="2" to-layer="34" to-port="0"/>
+		<edge from-layer="33" from-port="1" to-layer="34" to-port="1"/>
+		<edge from-layer="34" from-port="2" to-layer="36" to-port="0"/>
+		<edge from-layer="35" from-port="1" to-layer="36" to-port="1"/>
+		<edge from-layer="36" from-port="2" to-layer="38" to-port="0"/>
+		<edge from-layer="37" from-port="1" to-layer="38" to-port="1"/>
+		<edge from-layer="38" from-port="2" to-layer="40" to-port="0"/>
+		<edge from-layer="39" from-port="1" to-layer="40" to-port="1"/>
+		<edge from-layer="0" from-port="0" to-layer="41" to-port="0"/>
+		<edge from-layer="40" from-port="2" to-layer="41" to-port="1"/>
+		<edge from-layer="41" from-port="2" to-layer="42" to-port="0"/>
+	</edges>
+	<meta_data>
+		<MO_version value="unknown version"/>
+		<cli_parameters>
+			<blobs_as_inputs value="True"/>
+			<caffe_parser_path value="DIR"/>
+			<data_type value="float"/>
+			<disable_nhwc_to_nchw value="False"/>
+			<disable_omitting_optional value="False"/>
+			<disable_resnet_optimization value="False"/>
+			<disable_weights_compression value="False"/>
+			<enable_concat_optimization value="False"/>
+			<enable_flattening_nested_params value="False"/>
+			<enable_ssd_gluoncv value="False"/>
+			<extensions value="DIR"/>
+			<framework value="tf"/>
+			<freeze_placeholder_with_value value="{}"/>
+			<generate_deprecated_IR_V2 value="False"/>
+			<generate_deprecated_IR_V7 value="False"/>
+			<generate_experimental_IR_V10 value="True"/>
+			<input_model value="DIR/can.pb"/>
+			<input_model_is_text value="False"/>
+			<input_shape value="[1,321,481,3]"/>
+			<k value="DIR/CustomLayersMapping.xml"/>
+			<keep_quantize_ops_in_IR value="True"/>
+			<keep_shape_ops value="False"/>
+			<legacy_mxnet_model value="False"/>
+			<log_level value="ERROR"/>
+			<mean_scale_values value="{}"/>
+			<mean_values value="()"/>
+			<model_name value="can"/>
+			<move_to_preprocess value="False"/>
+			<output_dir value="DIR"/>
+			<placeholder_data_types value="{}"/>
+			<placeholder_shapes value="[  1 321 481   3]"/>
+			<progress value="False"/>
+			<remove_memory value="False"/>
+			<remove_output_softmax value="False"/>
+			<reverse_input_channels value="False"/>
+			<save_params_from_nd value="False"/>
+			<scale_values value="()"/>
+			<silent value="False"/>
+			<stream_output value="False"/>
+			<unset unset_cli_parameters="batch, counts, disable_fusing, disable_gfusing, finegrain_fusing, input, input_checkpoint, input_meta_graph, input_proto, input_symbol, mean_file, mean_file_offsets, nd_prefix_name, output, pretrained_model_name, saved_model_dir, saved_model_tags, scale, tensorboard_logdir, tensorflow_custom_layer_libraries, tensorflow_custom_operations_config_update, tensorflow_object_detection_api_pipeline_config, tensorflow_use_custom_operations_config, transformations_config"/>
+		</cli_parameters>
+	</meta_data>
+</net>
