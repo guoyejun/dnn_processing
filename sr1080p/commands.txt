@@ -1,0 +1,24 @@
+--------------------openvino backend----------------------------------
+
+#espcn
+run with GPU path:
+./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,dnn_processing=dnn_backend=openvino:model=espcn1080p.xml:input=x:output=espcn/prediction:options=device=GPU -y espcn.ov.gpu.mp4 
+
+run with CPU path:
+./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,dnn_processing=dnn_backend=openvino:model=espcn1080p.xml:input=x:output=espcn/prediction -y espcn.ov.cpu.mp4
+
+how about without dnn_processing
+./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p -y espcn.mp4
+
+
+#srcnn
+run with GPU path:
+./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2,dnn_processing=dnn_backend=openvino:model=srcnn1080p.xml:input=x:output=srcnn/Maximum:options=device=GPU  -y srcnn.ov.gpu.mp4
+
+run with CPU path:
+./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2,dnn_processing=dnn_backend=openvino:model=srcnn1080p.xml:input=x:output=srcnn/Maximum -y srcnn.ov.cpu.mp4 
+
+withoug dnn_processing:
+./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2 -y srcnn.mp4
+
+------------------tensorflow backend-------------------------------------
