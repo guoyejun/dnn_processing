@@ -21,4 +21,15 @@ run with CPU path:
 withoug dnn_processing:
 ./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2 -y srcnn.mp4
 
-------------------tensorflow backend-------------------------------------
+------------------tensorflow backend with cuda---------------------------
+
+#espcn
+./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,dnn_processing=dnn_backend=tensorflow:model=espcn1080p.pb:input=x:output=y:options=sess_config=0x31012a0332 -y espcn.tf.gpu.mp4
+
+./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p -y espcn.tf.gpu.mp4
+
+#srcnn
+./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2,dnn_processing=dnn_backend=tensorflow:model=srcnn1080p.pb:input=x:output=y:options=sess_config=0x31012a0332 -y srcnn.tf.gpu.mp4
+
+./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2 -y srcnn.tf.gpu.mp4
+
