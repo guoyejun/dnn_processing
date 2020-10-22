@@ -1,5 +1,7 @@
 --------------------openvino backend----------------------------------
 
+to scale up from 960x540 (fixed input size) to 1080p (1920x1080)
+
 #espcn
 run with GPU path:
 ./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,dnn_processing=dnn_backend=openvino:model=espcn1080p.xml:input=x:output=espcn/prediction:options=device=GPU -y espcn.ov.gpu.mp4 
@@ -21,15 +23,17 @@ run with CPU path:
 withoug dnn_processing:
 ./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2 -y srcnn.mp4
 
-------------------tensorflow backend with cuda---------------------------
+------------------tensorflow backend with gpu1 (physical gpu0)---------------------------
+
+variable input size
 
 #espcn
-./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,dnn_processing=dnn_backend=tensorflow:model=espcn1080p.pb:input=x:output=y:options=sess_config=0x31012a0332 -y espcn.tf.gpu.mp4
+./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,dnn_processing=dnn_backend=tensorflow:model=espcn.pb:input=x:output=y:options=sess_config=0x31012a0332 -y espcn.tf.gpu.mp4
 
 ./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p -y espcn.tf.gpu.mp4
 
 #srcnn
-./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2,dnn_processing=dnn_backend=tensorflow:model=srcnn1080p.pb:input=x:output=y:options=sess_config=0x31012a0332 -y srcnn.tf.gpu.mp4
+./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2,dnn_processing=dnn_backend=tensorflow:model=srcnn.pb:input=x:output=y:options=sess_config=0x31012a0332 -y srcnn.tf.gpu.mp4
 
 ./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2 -y srcnn.tf.gpu.mp4
 
