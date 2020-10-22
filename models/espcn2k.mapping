@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<mapping>
+	<map>
+		<framework name="espcn/conv3/BiasAdd" out_port_id="0"/>
+		<IR id="17" name="espcn/conv3/BiasAdd/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="y" out_port_id="0"/>
+		<IR id="19" name="espcn/prediction" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="espcn/prediction" out_port_id="0"/>
+		<IR id="19" name="espcn/prediction" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="espcn/conv3/kernel/read" out_port_id="0"/>
+		<IR id="14" name="espcn/conv3/kernel/read/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="espcn/conv2/Tanh" out_port_id="0"/>
+		<IR id="13" name="espcn/conv2/Tanh" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="espcn/conv1/kernel/read" out_port_id="0"/>
+		<IR id="4" name="espcn/conv1/kernel/read/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="espcn/MirrorPad" out_port_id="0"/>
+		<IR id="3" name="espcn/MirrorPad" out_port_id="3"/>
+	</map>
+	<map>
+		<framework name="espcn/conv1/Tanh" out_port_id="0"/>
+		<IR id="8" name="espcn/conv1/Tanh" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="espcn/conv3/Conv2D" out_port_id="0"/>
+		<IR id="15" name="espcn/conv3/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="espcn/conv3/Sigmoid" out_port_id="0"/>
+		<IR id="18" name="espcn/conv3/Sigmoid" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="espcn/conv2/BiasAdd" out_port_id="0"/>
+		<IR id="12" name="espcn/conv2/BiasAdd/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="espcn/conv1/Conv2D" out_port_id="0"/>
+		<IR id="5" name="espcn/conv1/Conv2D" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="espcn/conv2/kernel/read" out_port_id="0"/>
+		<IR id="9" name="espcn/conv2/kernel/read/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="espcn/conv1/BiasAdd" out_port_id="0"/>
+		<IR id="7" name="espcn/conv1/BiasAdd/Add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="espcn/conv2/Conv2D" out_port_id="0"/>
+		<IR id="10" name="espcn/conv2/Conv2D" out_port_id="2"/>
+	</map>
+</mapping>
