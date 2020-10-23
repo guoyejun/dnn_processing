@@ -2,6 +2,10 @@ repo: https://github.com/guoyejun/ffmpeg.git
 branch: fpsskip
 branch: async (fpsskip + 5 patches)
 
+espcn2k: upscale from 1280x720 to 2560x1440
+espcn4k: upscale from 1920x1080 to 3840x2160
+espcn1080p: upscale from 960x540 to 1920x1080 (use this model)
+
 --------------------openvino backend----------------------------------
 
 to scale up from 960x540 (fixed input size) to 1080p (1920x1080)

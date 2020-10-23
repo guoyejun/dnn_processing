@@ -12,49 +12,8 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="1" name="espcn/MirrorPad/Cast_1654_const" type="Const" version="opset1">
-			<data element_type="i64" offset="0" shape="4" size="32"/>
-			<output>
-				<port id="1" precision="I64">
-					<dim>4</dim>
-				</port>
-			</output>
-		</layer>
-		<layer id="2" name="espcn/MirrorPad/Cast_2656_const" type="Const" version="opset1">
-			<data element_type="i64" offset="0" shape="4" size="32"/>
-			<output>
-				<port id="1" precision="I64">
-					<dim>4</dim>
-				</port>
-			</output>
-		</layer>
-		<layer id="3" name="espcn/MirrorPad" type="Pad" version="opset1">
-			<data pad_mode="symmetric" pad_value="0.0"/>
-			<input>
-				<port id="0">
-					<dim>1</dim>
-					<dim>1</dim>
-					<dim>1080</dim>
-					<dim>1920</dim>
-				</port>
-				<port id="1">
-					<dim>4</dim>
-				</port>
-				<port id="2">
-					<dim>4</dim>
-				</port>
-			</input>
-			<output>
-				<port id="3" precision="FP32">
-					<dim>1</dim>
-					<dim>1</dim>
-					<dim>1088</dim>
-					<dim>1928</dim>
-				</port>
-			</output>
-		</layer>
-		<layer id="4" name="espcn/conv1/kernel/read/Output_0/Data__const" type="Const" version="opset1">
-			<data element_type="f32" offset="32" shape="64,1,5,5" size="6400"/>
+		<layer id="1" name="espcn/conv1/kernel/read/Output_0/Data__const" type="Const" version="opset1">
+			<data element_type="f32" offset="0" shape="64,1,5,5" size="6400"/>
 			<output>
 				<port id="1" precision="FP32">
 					<dim>64</dim>
@@ -64,14 +23,14 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="5" name="espcn/conv1/Conv2D" type="Convolution" version="opset1">
-			<data auto_pad="valid" dilations="1,1" output_padding="0,0" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+		<layer id="2" name="espcn/conv1/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="same_upper" dilations="1,1" output_padding="0,0" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
 					<dim>1</dim>
-					<dim>1088</dim>
-					<dim>1928</dim>
+					<dim>1080</dim>
+					<dim>1920</dim>
 				</port>
 				<port id="1">
 					<dim>64</dim>
@@ -84,13 +43,13 @@
 				<port id="2" precision="FP32">
 					<dim>1</dim>
 					<dim>64</dim>
-					<dim>1084</dim>
-					<dim>1924</dim>
+					<dim>1080</dim>
+					<dim>1920</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="6" name="espcn/conv1/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
-			<data element_type="f32" offset="6432" shape="1,64,1,1" size="256"/>
+		<layer id="3" name="espcn/conv1/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data element_type="f32" offset="6400" shape="1,64,1,1" size="256"/>
 			<output>
 				<port id="1" precision="FP32">
 					<dim>1</dim>
@@ -100,13 +59,13 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="7" name="espcn/conv1/BiasAdd/Add" type="Add" version="opset1">
+		<layer id="4" name="espcn/conv1/BiasAdd/Add" type="Add" version="opset1">
 			<input>
 				<port id="0">
 					<dim>1</dim>
 					<dim>64</dim>
-					<dim>1084</dim>
-					<dim>1924</dim>
+					<dim>1080</dim>
+					<dim>1920</dim>
 				</port>
 				<port id="1">
 					<dim>1</dim>
@@ -119,31 +78,31 @@
 				<port id="2" precision="FP32">
 					<dim>1</dim>
 					<dim>64</dim>
-					<dim>1084</dim>
-					<dim>1924</dim>
+					<dim>1080</dim>
+					<dim>1920</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="8" name="espcn/conv1/Tanh" type="Tanh" version="opset1">
+		<layer id="5" name="espcn/conv1/Tanh" type="Tanh" version="opset1">
 			<input>
 				<port id="0">
 					<dim>1</dim>
 					<dim>64</dim>
-					<dim>1084</dim>
-					<dim>1924</dim>
+					<dim>1080</dim>
+					<dim>1920</dim>
 				</port>
 			</input>
 			<output>
 				<port id="1" precision="FP32">
 					<dim>1</dim>
 					<dim>64</dim>
-					<dim>1084</dim>
-					<dim>1924</dim>
+					<dim>1080</dim>
+					<dim>1920</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="9" name="espcn/conv2/kernel/read/Output_0/Data__const" type="Const" version="opset1">
-			<data element_type="f32" offset="6688" shape="32,64,3,3" size="73728"/>
+		<layer id="6" name="espcn/conv2/kernel/read/Output_0/Data__const" type="Const" version="opset1">
+			<data element_type="f32" offset="6656" shape="32,64,3,3" size="73728"/>
 			<output>
 				<port id="1" precision="FP32">
 					<dim>32</dim>
@@ -153,14 +112,14 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="10" name="espcn/conv2/Conv2D" type="Convolution" version="opset1">
-			<data auto_pad="valid" dilations="1,1" output_padding="0,0" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+		<layer id="7" name="espcn/conv2/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="same_upper" dilations="1,1" output_padding="0,0" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
 					<dim>64</dim>
-					<dim>1084</dim>
-					<dim>1924</dim>
+					<dim>1080</dim>
+					<dim>1920</dim>
 				</port>
 				<port id="1">
 					<dim>32</dim>
@@ -173,13 +132,13 @@
 				<port id="2" precision="FP32">
 					<dim>1</dim>
 					<dim>32</dim>
-					<dim>1082</dim>
-					<dim>1922</dim>
+					<dim>1080</dim>
+					<dim>1920</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="11" name="espcn/conv2/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
-			<data element_type="f32" offset="80416" shape="1,32,1,1" size="128"/>
+		<layer id="8" name="espcn/conv2/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data element_type="f32" offset="80384" shape="1,32,1,1" size="128"/>
 			<output>
 				<port id="1" precision="FP32">
 					<dim>1</dim>
@@ -189,13 +148,13 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="12" name="espcn/conv2/BiasAdd/Add" type="Add" version="opset1">
+		<layer id="9" name="espcn/conv2/BiasAdd/Add" type="Add" version="opset1">
 			<input>
 				<port id="0">
 					<dim>1</dim>
 					<dim>32</dim>
-					<dim>1082</dim>
-					<dim>1922</dim>
+					<dim>1080</dim>
+					<dim>1920</dim>
 				</port>
 				<port id="1">
 					<dim>1</dim>
@@ -208,31 +167,31 @@
 				<port id="2" precision="FP32">
 					<dim>1</dim>
 					<dim>32</dim>
-					<dim>1082</dim>
-					<dim>1922</dim>
+					<dim>1080</dim>
+					<dim>1920</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="13" name="espcn/conv2/Tanh" type="Tanh" version="opset1">
+		<layer id="10" name="espcn/conv2/Tanh" type="Tanh" version="opset1">
 			<input>
 				<port id="0">
 					<dim>1</dim>
 					<dim>32</dim>
-					<dim>1082</dim>
-					<dim>1922</dim>
+					<dim>1080</dim>
+					<dim>1920</dim>
 				</port>
 			</input>
 			<output>
 				<port id="1" precision="FP32">
 					<dim>1</dim>
 					<dim>32</dim>
-					<dim>1082</dim>
-					<dim>1922</dim>
+					<dim>1080</dim>
+					<dim>1920</dim>
 				</port>
 			</output>
 		</layer>
-		<layer id="14" name="espcn/conv3/kernel/read/Output_0/Data__const" type="Const" version="opset1">
-			<data element_type="f32" offset="80544" shape="4,32,3,3" size="4608"/>
+		<layer id="11" name="espcn/conv3/kernel/read/Output_0/Data__const" type="Const" version="opset1">
+			<data element_type="f32" offset="80512" shape="4,32,3,3" size="4608"/>
 			<output>
 				<port id="1" precision="FP32">
 					<dim>4</dim>
@@ -242,14 +201,14 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="15" name="espcn/conv3/Conv2D" type="Convolution" version="opset1">
-			<data auto_pad="valid" dilations="1,1" output_padding="0,0" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
+		<layer id="12" name="espcn/conv3/Conv2D" type="Convolution" version="opset1">
+			<data auto_pad="same_upper" dilations="1,1" output_padding="0,0" pads_begin="0,0" pads_end="0,0" strides="1,1"/>
 			<input>
 				<port id="0">
 					<dim>1</dim>
 					<dim>32</dim>
-					<dim>1082</dim>
-					<dim>1922</dim>
+					<dim>1080</dim>
+					<dim>1920</dim>
 				</port>
 				<port id="1">
 					<dim>4</dim>
@@ -267,8 +226,8 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="16" name="espcn/conv3/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
-			<data element_type="f32" offset="85152" shape="1,4,1,1" size="16"/>
+		<layer id="13" name="espcn/conv3/bias/read/Output_0/Data_/copy_const" type="Const" version="opset1">
+			<data element_type="f32" offset="85120" shape="1,4,1,1" size="16"/>
 			<output>
 				<port id="1" precision="FP32">
 					<dim>1</dim>
@@ -278,7 +237,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="17" name="espcn/conv3/BiasAdd/Add" type="Add" version="opset1">
+		<layer id="14" name="espcn/conv3/BiasAdd/Add" type="Add" version="opset1">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -302,7 +261,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="18" name="espcn/conv3/Sigmoid" type="Sigmoid" version="opset1">
+		<layer id="15" name="espcn/conv3/Sigmoid" type="Sigmoid" version="opset1">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -320,7 +279,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="19" name="espcn/prediction" type="DepthToSpace" version="opset1">
+		<layer id="16" name="espcn/prediction" type="DepthToSpace" version="opset1">
 			<data block_size="2" mode="blocks_first"/>
 			<input>
 				<port id="0">
@@ -339,7 +298,7 @@
 				</port>
 			</output>
 		</layer>
-		<layer id="20" name="y/sink_port_0" type="Result" version="opset1">
+		<layer id="17" name="y/sink_port_0" type="Result" version="opset1">
 			<input>
 				<port id="0">
 					<dim>1</dim>
@@ -351,26 +310,23 @@
 		</layer>
 	</layers>
 	<edges>
-		<edge from-layer="0" from-port="0" to-layer="3" to-port="0"/>
-		<edge from-layer="1" from-port="1" to-layer="3" to-port="1"/>
-		<edge from-layer="2" from-port="1" to-layer="3" to-port="2"/>
-		<edge from-layer="3" from-port="3" to-layer="5" to-port="0"/>
-		<edge from-layer="4" from-port="1" to-layer="5" to-port="1"/>
-		<edge from-layer="5" from-port="2" to-layer="7" to-port="0"/>
+		<edge from-layer="0" from-port="0" to-layer="2" to-port="0"/>
+		<edge from-layer="1" from-port="1" to-layer="2" to-port="1"/>
+		<edge from-layer="2" from-port="2" to-layer="4" to-port="0"/>
+		<edge from-layer="3" from-port="1" to-layer="4" to-port="1"/>
+		<edge from-layer="4" from-port="2" to-layer="5" to-port="0"/>
+		<edge from-layer="5" from-port="1" to-layer="7" to-port="0"/>
 		<edge from-layer="6" from-port="1" to-layer="7" to-port="1"/>
-		<edge from-layer="7" from-port="2" to-layer="8" to-port="0"/>
-		<edge from-layer="8" from-port="1" to-layer="10" to-port="0"/>
-		<edge from-layer="9" from-port="1" to-layer="10" to-port="1"/>
-		<edge from-layer="10" from-port="2" to-layer="12" to-port="0"/>
+		<edge from-layer="7" from-port="2" to-layer="9" to-port="0"/>
+		<edge from-layer="8" from-port="1" to-layer="9" to-port="1"/>
+		<edge from-layer="9" from-port="2" to-layer="10" to-port="0"/>
+		<edge from-layer="10" from-port="1" to-layer="12" to-port="0"/>
 		<edge from-layer="11" from-port="1" to-layer="12" to-port="1"/>
-		<edge from-layer="12" from-port="2" to-layer="13" to-port="0"/>
-		<edge from-layer="13" from-port="1" to-layer="15" to-port="0"/>
-		<edge from-layer="14" from-port="1" to-layer="15" to-port="1"/>
-		<edge from-layer="15" from-port="2" to-layer="17" to-port="0"/>
-		<edge from-layer="16" from-port="1" to-layer="17" to-port="1"/>
-		<edge from-layer="17" from-port="2" to-layer="18" to-port="0"/>
-		<edge from-layer="18" from-port="1" to-layer="19" to-port="0"/>
-		<edge from-layer="19" from-port="1" to-layer="20" to-port="0"/>
+		<edge from-layer="12" from-port="2" to-layer="14" to-port="0"/>
+		<edge from-layer="13" from-port="1" to-layer="14" to-port="1"/>
+		<edge from-layer="14" from-port="2" to-layer="15" to-port="0"/>
+		<edge from-layer="15" from-port="1" to-layer="16" to-port="0"/>
+		<edge from-layer="16" from-port="1" to-layer="17" to-port="0"/>
 	</edges>
 	<meta_data>
 		<MO_version value="unknown version"/>
