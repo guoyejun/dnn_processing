@@ -1,39 +1,23 @@
+repo: https://github.com/guoyejun/ffmpeg.git
+branch: fpsskip
+branch: async (fpsskip + 5 patches)
+
 --------------------openvino backend----------------------------------
 
 to scale up from 960x540 (fixed input size) to 1080p (1920x1080)
 
-#espcn
-run with GPU path:
+run with GPU path (branch fpsskip):
 ./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,dnn_processing=dnn_backend=openvino:model=espcn1080p.xml:input=x:output=espcn/prediction:options=device=GPU -y espcn.ov.gpu.mp4 
 
-run with CPU path:
-./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,dnn_processing=dnn_backend=openvino:model=espcn1080p.xml:input=x:output=espcn/prediction -y espcn.ov.cpu.mp4
+try with different batch_size and nireq (branch async):
+./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,dnn_processing=dnn_backend=openvino:model=espcn1080p.xml:input=x:output=espcn/prediction:options="device=GPU&batch_size=4&nireq=8" -y espcn.ov.async.gpu.mp4
 
-how about without dnn_processing
-./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p -y espcn.mp4
-
-
-#srcnn
-run with GPU path:
-./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2,dnn_processing=dnn_backend=openvino:model=srcnn1080p.xml:input=x:output=srcnn/Maximum:options=device=GPU  -y srcnn.ov.gpu.mp4
-
-run with CPU path:
-./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2,dnn_processing=dnn_backend=openvino:model=srcnn1080p.xml:input=x:output=srcnn/Maximum -y srcnn.ov.cpu.mp4 
-
-withoug dnn_processing:
-./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2 -y srcnn.mp4
 
 ------------------tensorflow backend with gpu1 (physical gpu0)---------------------------
 
-variable input size
+.pb supports variable input size
 
-#espcn
+(branch fpsskip)
 ./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,dnn_processing=dnn_backend=tensorflow:model=espcn.pb:input=x:output=y:options=sess_config=0x31012a0332 -y espcn.tf.gpu.mp4
 
-./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p -y espcn.tf.gpu.mp4
-
-#srcnn
-./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2,dnn_processing=dnn_backend=tensorflow:model=srcnn.pb:input=x:output=y:options=sess_config=0x31012a0332 -y srcnn.tf.gpu.mp4
-
-./ffmpeg -fps_skip_frames 10 -i onemin960x540.mp4 -vf format=yuv420p,scale=w=iw*2:h=ih*2 -y srcnn.tf.gpu.mp4
 
