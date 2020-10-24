@@ -18,6 +18,9 @@ try with different batch_size and nireq (branch async):
 
 
 ------------------tensorflow backend with gpu1 (physical gpu0)---------------------------
+gpu0: 0x30012a0332
+gpu1: 0x31012a0332
+gpu2: 0x32012a0332
 
 .pb supports variable input size
 
